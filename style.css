@@ -15,7 +15,7 @@ a{
 }
 
 nav{
-    margin-left: 35%;
+    float: right;
     display: inline;
 }
 
