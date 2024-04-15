@@ -9,13 +9,14 @@
 
 a{
     text-decoration: none;
-    padding: 20px;
+    padding: 10px;
     color: white;
     font-family: 'Open Sans';
 }
 
 nav{
-    margin-left: 35%;
+    float: right;
+    padding-top: 10px;
     display: inline;
 }
 
