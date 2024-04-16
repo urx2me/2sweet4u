@@ -23,52 +23,82 @@
         </div>
 
         <style>
-            header{
-            position: relative;
-            height: 200px;
-        }
-        .background{
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url(https://cdn.pixabay.com/photo/2017/08/01/02/10/dark-2562840_640.jpg); 
-            background-position: bottom; 
-            background-size: cover; 
-            opacity: 50%;
-            z-index: -1;
-        }
-        
-        .page{
-    
-            width: 100%;
-            height: 100%;
-            top: 30%;
-            right: 0%;
-            position: fixed;
-            background-color: #1F3850;
+            header {
+                position: relative;
+                height: 200px;
+            }
 
-        }
+            .background {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-image: url(https://cdn.pixabay.com/photo/2017/08/01/02/10/dark-2562840_640.jpg);
+                background-position: bottom;
+                background-size: cover;
+                opacity: 50%;
+                z-index: -1;
+            }
 
-        .box{
-            border: 5px;
-            border-style: solid;
-            border-color: white;
-            text-align: center;
-            color: white;
-            width: 40%;
-            height: 40%;
-            margin: auto;
-        }
+            .box {
+                border: 5px;
+                border-style: solid;
+                border-color: white;
+                text-align: center;
+                color: white;
+                width: 40%;
+                height: 40%;
+                margin: auto;
+                position: relative;
+            }
 
+            .page {
+                width: 100%; 
+                height: auto; 
+                top: 30%;
+                right: 1%;
+                justify-content: center; 
+                align-items: center; 
+                position: relative;
+                background-color: #1F3850;
+                padding: 20px; 
+                
+            }
+
+            img {
+                width: 550px; 
+                height: 350px; 
+                margin: 20px;
+            }   
+
+            .text {
+                font-family: 'Open Sans';
+                font-size: 24px;
+                color: #c4d9d0;
+                position:relative;
+                
+            }
         </style>
 
 
     </header>   
     <div class="background"></div>
 
-    <div class="page"></div>
+    <div class="page">
+        <img src="https://c.pxhere.com/photos/1e/c0/biscuits_sweet_bear_cub_foods_biscuit_sugar-956917.jpg!d", alt="Cookies" style="padding-left: 17%;">
+        <img src="https://images.pexels.com/photos/239575/pexels-photo-239575.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", alt="Cookies" >
+           <div class="text">
+            <figcaption>
+                <h1 style ="color:#bbccd6; font-family:'Playfair';">The Story</h1>
+                <br>
+                <p style="text-indent: 50px;">The company named "2Sweet4U" was founded by four students that had the desire to make the world a better place and these students had the idea of of making sweets as its solution.</p>
+                <p style="text-indent: 50px;">Here at 2Sweet4U we ensure that the ingredients we use are top-notch to ensure customers like you to give the best experience! </p>
+                <p style="text-indent: 50px;">Don't halt your craves on sweets, come to2Sweet4U and we'll promise that we will satisfy those and even make come back for more~!</p>
+            </figcaption>
+           </div>
+
+    </div>
 
 </body>
 </html>
