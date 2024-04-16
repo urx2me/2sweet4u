@@ -1,9 +1,10 @@
 #sweet4u {
     font-family: Playfair;
-    font-size: 30px;
+    font-size: 3vw;
     font-weight: bold;
     padding: 0%;
     padding-left: 20px;
+    margin: 0%;
     color: white;
 }
 
@@ -12,14 +13,15 @@ a{
     padding: 10px;
     color: white;
     font-family: 'Open Sans';
+    font-size: 1.3vw;
 }
 
 nav{
     float: right;
-
     display: inline;
 }
 
 body{
     background-color: #1F3850;
+    margin:0 ;
 }
