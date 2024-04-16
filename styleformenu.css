@@ -9,70 +9,95 @@
 
 a {
     text-decoration: none;
-    padding: 20px;
+    padding: 10px;
     color: white;
     font-family: 'Open Sans';
 }
 
 nav {
-    margin-left: 35%;
+    float: right;
     display: inline;
 }
 
 body {
     background-color: #1F3850;
-    margin: 0;
-    padding: 0;
+    margin: 0; /* Remove default margin */
+    overflow-y: auto;
 }
 
-#divheader {
-    padding: 20px;
-    width: auto;
-    margin: 0 auto;
-    background-image: url('https://enjouchocolat.com/cdn/shop/collections/Website_Header_Rotation_2.jpg?v=1687286647');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    display: flex;
-    justify-content: center;
-    position: relative;
+header {
+    height: 200px;
+    position: fixed; /* Fix header position */
+    width: 100%;
+    z-index: 1; /* Ensure header stays on top of other elements */
 }
 
-#divheader::before {
-    content: "";
+.background {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(31, 56, 80, 0.5);
-    z-index: 1;
+    background-image: url('https://enjouchocolat.com/cdn/shop/collections/Website_Header_Rotation_2.jpg?v=1687286647');
+    background-position: bottom;
+    background-size: cover;
+    opacity: 50%;
+    z-index: -1;
 }
 
-#divheader h1 {
-    border: 5px solid white;
-    color: aliceblue;
-    font-size: 50px;
-    padding: 20px;
-    width: 500px;
-    z-index: 2;
+.page {
+    width: 100%;
+    height: 100%;
+    top: 30%;
+    right: 0%;
+    position: fixed;
+    background-color: #1F3850;
+    padding: 20px; /* Add padding to the page */
+    box-sizing: border-box;
+    overflow-y: auto; /* Enable vertical scrolling when content overflows */
+    height: 100vh; /* Set height to viewport height */
 }
 
-h1 {
-    color: aliceblue;
+
+
+.box {
+    border: 5px;
+    border-style: solid;
+    border-color: white;
     text-align: center;
-    font-size: 50px;
+    color: white;
+    width: 40%;
+    height: 40%;
+    margin: auto;
 }
 
-p {
-    color: aliceblue;
+
+.page h1 {
+    font-size: 40px;
+    margin-bottom: 20px;
+    color:aliceblue;
     text-align: center;
-    font-size: 25px;
 }
+
+.page h2 {
+    font-size: 30px;
+    margin-bottom: 20px;
+    color:aliceblue;
+    text-align: center;
+}
+
+.page p {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color:aliceblue;
+    text-align: center;
+}
+
 .container {
     display: flex;
+    flex-wrap: wrap; /* Allow flex items to wrap to new line */
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start; /* Align items to flex-start */
 }
 
 .image-container {
@@ -89,4 +114,5 @@ p {
 .divider {
     border-right: 2px solid #ccc;
     height: 100%;
+    margin: 0 20px; /* Adjust margin */
 }
