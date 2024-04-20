@@ -81,26 +81,26 @@
             text-align: center;
         }
 
-        #t2 tr td{
-            border-width: 0.5vw;
+        .menu-item {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            color: aliceblue;
+            text-align: center;
         }
 
-        #t2 td{
-            width: 20%;
-        }
-
-        #t2 img{
-            display: block;
-            height: 100%;
-            width: 100%;
+        .menu-item img {
+            width: 45%;
             object-fit: cover;
         }
 
-        #t2 p {
+        .menu-item-content {
+            width: 45%;
+        }
+
+        .menu-item-content p {
             font-size: 20px;
             margin-bottom: 20px;
-            color:aliceblue;
-            text-align: center;
         }
     </style>
 </head>
@@ -122,25 +122,26 @@
     </header>
 
     <main>
-<table id="t1">
-    <tr>
-        <td id="td2" style="text-align: center;"><b>TOP SELLERS</b></td>
-    </tr>
-</table>
+        <div id="t1">
+            <div id="td2" style="text-align: center;"><b>TOP SELLERS</b></div>
+        </div>
 
-        <table id="t2">
-            <tr>
-                <td><img src="https://insanelygoodrecipes.com/wp-content/uploads/2022/01/Homemade-Chocolate-Truffles-with-Fresh-Berries.jpg" alt=""></td>
-                <td><img src="https://food.fnr.sndimg.com/content/dam/images/food/fullset/2020/10/14/0/FNK_PECAN_PIE_BROWNIES_H_f_s4x3.jpg.rend.hgtvcom.1280.720.suffix/1602697125514.jpeg" alt=""></td>
-            </tr>
-
-            <tr>
-                <td><b>Truffles</b> <br><br><br>
-                    <p>Chocolate truffles feature a chocolate ganache center topped with cocoa powder, sprinkles, nuts, chocolate shavings, or coconut. </p>
-                    <br><br><br><br></td>
-                <td><b>Brownies</b> <br><br><br><p>Brownies is a small, chewy, cakelike cookie, usually made with chocolate and containing nuts.</p><br><br><br><br></td>
-            </tr>
-        </table>
+        <div id="t2">
+            <div class="menu-item">
+                <img src="https://insanelygoodrecipes.com/wp-content/uploads/2022/01/Homemade-Chocolate-Truffles-with-Fresh-Berries.jpg" alt="">
+                <div class="menu-item-content">
+                    <b>Truffles</b>
+                    <p>Chocolate truffles feature a chocolate ganache center topped with cocoa powder, sprinkles, nuts, chocolate shavings, or coconut.</p>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src="https://food.fnr.sndimg.com/content/dam/images/food/fullset/2020/10/14/0/FNK_PECAN_PIE_BROWNIES_H_f_s4x3.jpg.rend.hgtvcom.1280.720.suffix/1602697125514.jpeg" alt="">
+                <div class="menu-item-content">
+                    <b>Brownies</b>
+                    <p>Brownies is a small, chewy, cakelike cookie, usually made with chocolate and containing nuts.</p>
+                </div>
+            </div>
+        </div>
     </main>
     
 </body>

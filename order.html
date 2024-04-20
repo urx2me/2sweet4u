@@ -6,26 +6,26 @@
     <title>2sweet4u</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        header{
+        header {
             position: relative;
             height: 20%;
             padding: 10px;
             overflow: hidden;
         }
-        .background{
+        .background {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background-image: url('https://png.pngtree.com/background/20230526/original/pngtree-candy-store-full-of-lots-of-candy-picture-image_2743542.jpg'); 
-            background-position: center ; 
+            background-position: center; 
             background-size: cover; 
             opacity: 30%;
             z-index: -1;
         }
 
-        .box{
+        .box {
             border: 5px;
             border-style: solid;
             border-color: white;
@@ -41,59 +41,100 @@
             top: 0%;
         }
 
-        #t1{
+        #t1 {
             width: 85%;
             margin: 2%;
             margin-left: 7%;
             font-family: 'Open Sans';
         }
-        
-        #p1{
+
+        #p1 {
             width: 95%;
         }
 
-        #td1{
+        #td1 {
             width: 40%;
             color: whitesmoke;           
         }
 
-        #td2{
+        #td2 {
             vertical-align: top;
             padding-top: 5%;
         }
 
-        #td2 p{
+        #td2 p {
             color: white;
-            font-size: 1.2vw;
-            
+            font-size: 1.2vw;     
         }
-        
-        b{
+
+        b {
             color: whitesmoke;
             font-size: 3vw;
             font-family: Playfair;
         }
 
-        #t2{
-            width: 85%;
-            margin-left: 2%;
-            margin-left: 7%;
+        .menu-item {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            color: aliceblue;
             text-align: center;
         }
 
-        #t2 tr td{
-            border-width: 0.5vw;
-        }
-
-        #t2 td{
-            width: 20%;
-        }
-
-        #t2 img{
-            display: block;
-            height: 100%;
-            width: 100%;
+        .menu-item img {
+            width: 45%;
             object-fit: cover;
+        }
+
+        .menu-item-content {
+            width: 45%;
+        }
+
+        .menu-item-content p {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .product {
+            border: 2px solid white;
+            padding: 10px;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 25px;
+            display: flex;
+            align-items: center;
+        }
+
+        #productImage {
+            width: 150px;
+            margin-right: 20px;
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        #quantityPrice {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #quantityPrice input {
+            width: 50px;
+            text-align: center;
+        }
+
+        h1 {
+            color: whitesmoke;
+            font-size: 3vw;
+            font-family: Playfair;
+            text-align: center;
+        }
+
+        label {
+            color: whitesmoke;
+            font-size: 25px;
         }
     </style>
 </head>
@@ -115,6 +156,78 @@
     </header>
 
     <main>
+        <h1>Order Form</h1>
+        <form id="orderForm">
+            <label for="productSelection">Select a Product:</label>
+            <select id="productSelection" style="font-size: 25px;">
+                <option value="truffles">Truffles</option>
+                <option value="brownies">Brownies</option>
+            </select>
+            <button type="button" onclick="addToCart()">Add to Cart</button>
+            <div id="orderSection"></div>
+            <button type="submit">Submit Order</button>
+        </form>
+
+        <script>
+            function addToCart() {
+                const selectedProduct = document.getElementById('productSelection').value;
+                const orderSection = document.getElementById('orderSection');
+                
+                const productDiv = document.createElement('div');
+                productDiv.classList.add('product');
+                productDiv.innerHTML = `
+                    <img id="productImage" src="${getProductImage(selectedProduct)}" alt="${selectedProduct}">
+                    <div class="product-info">
+                        <h3>${selectedProduct.charAt(0).toUpperCase() + selectedProduct.slice(1)}</h3>
+                        <div id="quantityPrice">
+                            <label for="${selectedProduct}Quantity">Quantity:</label>
+                            <input type="number" id="${selectedProduct}Quantity" min="1" value="1">
+                            <p>Price: &#x20B1;<span id="${selectedProduct}Price">0.00</span></p>
+                        </div>
+                    </div>
+                `;
+
+                productDiv.addEventListener('input', function() {
+                    calculatePrice(selectedProduct);
+                });
+
+                orderSection.appendChild(productDiv);
+                calculatePrice(selectedProduct);
+            }
+
+            function calculatePrice(product) {
+                const quantityInput = document.getElementById(`${product}Quantity`);
+                const priceSpan = document.getElementById(`${product}Price`);
+                const productPrice = getProductPrice(product);
+                const quantity = parseInt(quantityInput.value);
+                const totalPrice = productPrice * quantity;
+                priceSpan.textContent = totalPrice.toFixed(2);
+            }
+
+            function getProductPrice(product) {
+                // Define product prices here
+                const prices = {
+                    'truffles': 250.00,
+                    'brownies': 150.00
+                };
+                return prices[product] || 0; // Return 0 if product not found
+            }
+
+            function getProductImage(product) {
+                // Define product images here
+                const images = {
+                    'truffles': 'https://insanelygoodrecipes.com/wp-content/uploads/2022/01/Homemade-Chocolate-Truffles-with-Fresh-Berries.jpg',
+                    'brownies': 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2020/10/14/0/FNK_PECAN_PIE_BROWNIES_H_f_s4x3.jpg.rend.hgtvcom.1280.720.suffix/1602697125514.jpeg'
+                };
+                return images[product] || ''; // Return empty string if product not found
+            }
+
+            document.getElementById('orderForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                // You can add code here to submit the order
+                alert('Order submitted!');
+            });
+        </script>
     </main>
     
 </body>
