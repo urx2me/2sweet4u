@@ -5,9 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2sweet4u</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <style>
+         header{
+            position: relative;
+            height: 20%;
+            padding: 10px;
+            overflow: hidden;
+        }
+        .background{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url(https://website-assets-fd.freshworks.com/attachments/cktocfdx100g21cfz90plcso3-agent-customer-high-five-02-1.full.png); 
+            background-position: center ; 
+            background-size: cover; 
+            opacity: 30%;
+            z-index: -1;
+        }
+
+        .box{
+            border: 5px;
+            border-style: solid;
+            border-color: white;
+            text-align: center;
+            color: white;
+            width: 50vw;
+            height: 17vw;
+            margin: auto;
+            margin-bottom: 2.5%;
+            font-size: 5.5vw;
+            font-weight: bold;
+            font-family: Caveat;
+            top: 0%;
+        }
+        main{
+            position: relative;
+            height: 60%;
+        }
+        .csupport{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url(data:image/png;base64,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); 
+            background-position: center ; 
+            background-size: cover; 
+            opacity: 30%;
+            z-index: -2;
+            filter: blur(8px);
+            opacity: 10%;
+        }
+        .form{
+            color: white;
+            padding-top: 5%;
+            padding-left: 40%;
+            font-family: 'Open Sans';
+        }
+    </style>
 </head>
 <body>
     <header>       
+        <div class="background"></div>
         <span id="sweet4u">2Sweet4U</span>
         <nav>
             <a href="index.html">Home</a>
@@ -16,9 +80,30 @@
             <a href="order.html">Order</a>
             <a href="location.html">Location</a>
             <a href="customersupport.html">Customer Support</a>
-        </nav>
+        </nav> <br><br><br>   
+        <div class="box">
+            <p>Customer Support</p>
+        </div>
         
     </header>
+
+    <main>
+        <div class="csupport"> </div>
+            <form class="form" action="">
+                <label for="">Name</label><br>
+                <input type="text"><br><br><br>
+                <label for="">Email</label><br>
+                <input type="text"><br><br><br>
+                <label for="">What can we help you with?</label><br>
+                <input type="radio"> <label for="">Payment Issues</label><br>
+                <input type="radio"> <label for="">Website Issues</label><br>   
+                <input type="radio"> <label for="">Other:</label> <input type="text"> <br><br><br>
+                <label for="">Details</label><br>
+                <textarea name="" id="" cols="30" rows="10"></textarea><br><br><br>
+                <input type="submit"><br><br>
+            </form>
+        
+    </main>
     
 </body>
 </html>
