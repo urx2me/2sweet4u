@@ -295,7 +295,7 @@ function addToCart() {
                 const option = optionSelect.value;
                 let totalPrice;
                 if (option === 'box') {
-                    totalPrice = productPrice * quantity * 3;
+                    totalPrice = productPrice * quantity * 10;
                 } else {
                     totalPrice = productPrice * quantity;
                 }
@@ -305,10 +305,10 @@ function addToCart() {
 
             function getProductPrice(product) {
                 const prices = {
-                    'truffles': 350.00,
+                    'truffles': 250.00,
                     'brownies': 150.00,
-                    'cookies': 100.00,
-                    'tiramisu': 200.00,
+                    'cookies': 200.00,
+                    'tiramisu': 300.00,
                     'macarons': 150.00,
                     'bunet': 250.00,
                     'Chocolate Pudding with Miso Caramel': 150.00,
