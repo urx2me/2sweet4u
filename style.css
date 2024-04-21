@@ -16,6 +16,11 @@ a{
     font-size: 1.3vw;
 }
 
+a:hover {
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
 nav{
     float: right;
     display: inline;
@@ -31,6 +36,7 @@ nav{
 
 #top.dark{
     background-color: black;
+    z-index:1000;
 }
 
 body{
