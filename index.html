@@ -9,7 +9,6 @@
         header{
             position: relative;
             height: 20%;
-            padding: 10px;
             overflow: hidden;
         }
         .background{
@@ -100,15 +99,17 @@
 <body>
     <header>
         <div class="background"></div> 
+        <div id="top">
         <span id="sweet4u">2Sweet4U</span>
         <nav>
-            <a href="">Home</a>
+            <a href=""><u><strong>Home</strong></u></a>
             <a href="about.html">About</a>
             <a href="menu.html">Menu</a>
             <a href="order.html">Order</a>
             <a href="location.html">Location</a>
             <a href="customersupport.html">Customer Support</a>
-        </nav><br><br><br>   
+        </nav>
+        </div><br><br><br>   
         <div class="box">
             <p>2 Sweet 4 U</p>
         </div>
@@ -136,6 +137,12 @@
             </tr>
         </table>
     </main>
-    
+    <script>
+        window.addEventListener('scroll', function() {
+            var top = document.getElementById('top');
+            var isScrolled = window.scrollY > 0;
+            top.classList.toggle('dark', isScrolled);
+        });
+    </script>
 </body>
 </html>
