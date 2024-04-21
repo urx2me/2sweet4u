@@ -140,13 +140,9 @@
 
         #orderForm {
             position: relative;
-            padding-bottom: 100px; /* Height of the fixed Submit Order button + Total Price */
         }
 
         #submitOrderButton {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
             font-size: 20px;
             padding: 10px 20px;
             background-color: #4CAF50;
@@ -154,14 +150,20 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            /* display: none; */
+        }
+
+        #submitOrderButtonContainer,
+        #totalPrice {
+            text-align: right;
+            margin-right: 20px;
+            margin-bottom: 20px;
         }
 
         #totalPrice {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            font-size: 20px;
+            font-size: 30px;
             color: whitesmoke;
+            /* display: none; */
         }
     </style>
 </head>
@@ -196,7 +198,9 @@
             <button type="button" onclick="addToCart()">Add to Cart</button>
             <div id="orderSection"></div>
             <div id="totalPrice"></div>
-            <button type="submit" id="submitOrderButton">Submit Order</button>
+            <div id="submitOrderButtonContainer">
+                <button type="button" id="submitOrderButton" onclick="submitOrder()">Submit Order</button>
+            </div>
         </form>
 
         <script>
@@ -221,7 +225,7 @@
                         <div id="quantityPrice">
                             <label for="${selectedProduct}Quantity">Quantity:</label>
                             <input type="number" id="${selectedProduct}Quantity" min="1" value="1">
-                            <p>Price: &#x20B1;<span id="${selectedProduct}Price">0.00</span></p>
+                            <p>Price: ₱<span id="${selectedProduct}Price">0.00</span></p>
                         </div>
                     </div>
                 `;
@@ -232,6 +236,7 @@
 
                 orderSection.appendChild(productDiv);
                 calculatePrice(selectedProduct);
+                updateTotalPrice();
             }
 
             function calculatePrice(product) {
@@ -244,25 +249,14 @@
                 updateTotalPrice();
             }
 
-            function updateTotalPrice() {
-                const products = document.querySelectorAll('.product');
-                let totalPrice = 0;
-                products.forEach(product => {
-                    const quantity = parseInt(product.querySelector('input').value);
-                    const price = parseFloat(product.querySelector('span').textContent);
-                    totalPrice += quantity * price;
-                });
-                document.getElementById('totalPrice').textContent = `Total Price: &#x20B1;${totalPrice.toFixed(2)}`;
-            }
-
             function getProductPrice(product) {
                 // Define product prices here
                 const prices = {
                     'truffles': 250.00,
                     'brownies': 150.00,
-                    'cookies': 150.00,
-                    'tiramisu': 150.00,
-                    'macarons': 250.00
+                    'cookies': 200.00,
+                    'tiramisu': 300.00,
+                    'macarons': 180.00
                 };
                 return prices[product] || 0; // Return 0 if product not found
             }
@@ -274,22 +268,41 @@
                     'brownies': 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2020/10/14/0/FNK_PECAN_PIE_BROWNIES_H_f_s4x3.jpg.rend.hgtvcom.1280.720.suffix/1602697125514.jpeg',
                     'cookies': 'https://preppykitchen.com/wp-content/uploads/2023/04/Peanut-Butter-Chocolate-Chip-Cookies-Recipe-Card.jpg',
                     'tiramisu': 'https://bakedbrewedbeautiful.com/wp-content/uploads/2021/03/DSC0432-1024x684.jpg',
-                    'macarons': 'https://www.southernliving.com/thmb/dnsycw_-mf35yKRkq3cBsThVzrY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Southern-Living_Macarons_025-0e05e0cd226d44609f55ed8bc9cd3a3e.jpg',
+                    'macarons': 'https://www.southernliving.com/thmb/dnsycw_-mf35yKRkq3cBsThVzrY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Southern-Living_Macarons_025-0e05e0cd226d44609f55ed8bc9cd3a3e.jpg'
                 };
                 return images[product] || ''; // Return empty string if product not found
             }
 
-            document.getElementById('orderForm').addEventListener('submit', function(event) {
-                event.preventDefault();
-                // You can add code here to submit the order
+            function submitOrder() {
                 alert('Order submitted! Thank you for buying at 2Sweet4U');
                 clearOrders();
-                updateTotalPrice(); // Reset total price after submitting order
-            });
+            }
 
             function clearOrders() {
                 const orderSection = document.getElementById('orderSection');
                 orderSection.innerHTML = ''; // Clear the order section
+                updateTotalPrice(); // Update total price and show/hide submit button
+            }
+
+            function updateTotalPrice() {
+                const orderSection = document.getElementById('orderSection');
+                const productDivs = orderSection.querySelectorAll('.product');
+                let totalPrice = 0;
+                productDivs.forEach(function(productDiv) {
+                    const priceSpan = productDiv.querySelector('span');
+                    const price = parseFloat(priceSpan.textContent);
+                    totalPrice += price;
+                });
+                const totalPriceElement = document.getElementById('totalPrice');
+                totalPriceElement.textContent = `Total: ₱${totalPrice.toFixed(2)}`;
+                const submitOrderButtonContainer = document.getElementById('submitOrderButtonContainer');
+                if (totalPrice > 0) {
+                    totalPriceElement.style.display = 'block'; // Show total price
+                    submitOrderButtonContainer.style.display = 'block'; // Show submit order button container
+                } else {
+                    totalPriceElement.style.display = 'none'; // Hide total price
+                    submitOrderButtonContainer.style.display = 'none'; // Hide submit order button container
+                }
             }
         </script>
     </main>
