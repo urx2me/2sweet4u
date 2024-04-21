@@ -82,17 +82,13 @@
         }
 
         .menu-item img {
-            width: 45%;
+            width: 100%;
+            max-width: 300px;
             object-fit: cover;
         }
 
         .menu-item-content {
             width: 45%;
-        }
-
-        .menu-item-content p {
-            font-size: 20px;
-            margin-bottom: 20px;
         }
 
         .product {
@@ -106,7 +102,7 @@
         }
 
         #productImage {
-            width: 150px;
+            width: 200px;
             margin-right: 20px;
         }
 
@@ -136,6 +132,37 @@
             color: whitesmoke;
             font-size: 25px;
         }
+
+        main {
+            position: relative;
+            min-height: calc(100vh - 20%);
+        }
+
+        #orderForm {
+            position: relative;
+            padding-bottom: 100px; /* Height of the fixed Submit Order button + Total Price */
+        }
+
+        #submitOrderButton {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #totalPrice {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-size: 20px;
+            color: whitesmoke;
+        }
     </style>
 </head>
 <body>
@@ -162,10 +189,14 @@
             <select id="productSelection" style="font-size: 25px;">
                 <option value="truffles">Truffles</option>
                 <option value="brownies">Brownies</option>
+                <option value="cookies">Chocolate Chip Cookies</option>
+                <option value="tiramisu">Tiramisu</option>
+                <option value="macarons">Macarons</option>
             </select>
             <button type="button" onclick="addToCart()">Add to Cart</button>
             <div id="orderSection"></div>
-            <button type="submit">Submit Order</button>
+            <div id="totalPrice"></div>
+            <button type="submit" id="submitOrderButton">Submit Order</button>
         </form>
 
         <script>
@@ -173,7 +204,15 @@
                 const selectedProduct = document.getElementById('productSelection').value;
                 const orderSection = document.getElementById('orderSection');
                 
+                // Check if the product is already in the cart
+                const productAlreadyInCart = orderSection.querySelector(`#${selectedProduct}Product`);
+                if (productAlreadyInCart) {
+                    alert('This product is already in the cart.');
+                    return; // Do not add the product again
+                }
+                
                 const productDiv = document.createElement('div');
+                productDiv.id = `${selectedProduct}Product`; // Use product ID as identifier
                 productDiv.classList.add('product');
                 productDiv.innerHTML = `
                     <img id="productImage" src="${getProductImage(selectedProduct)}" alt="${selectedProduct}">
@@ -202,13 +241,28 @@
                 const quantity = parseInt(quantityInput.value);
                 const totalPrice = productPrice * quantity;
                 priceSpan.textContent = totalPrice.toFixed(2);
+                updateTotalPrice();
+            }
+
+            function updateTotalPrice() {
+                const products = document.querySelectorAll('.product');
+                let totalPrice = 0;
+                products.forEach(product => {
+                    const quantity = parseInt(product.querySelector('input').value);
+                    const price = parseFloat(product.querySelector('span').textContent);
+                    totalPrice += quantity * price;
+                });
+                document.getElementById('totalPrice').textContent = `Total Price: &#x20B1;${totalPrice.toFixed(2)}`;
             }
 
             function getProductPrice(product) {
                 // Define product prices here
                 const prices = {
                     'truffles': 250.00,
-                    'brownies': 150.00
+                    'brownies': 150.00,
+                    'cookies': 150.00,
+                    'tiramisu': 150.00,
+                    'macarons': 250.00
                 };
                 return prices[product] || 0; // Return 0 if product not found
             }
@@ -217,7 +271,10 @@
                 // Define product images here
                 const images = {
                     'truffles': 'https://insanelygoodrecipes.com/wp-content/uploads/2022/01/Homemade-Chocolate-Truffles-with-Fresh-Berries.jpg',
-                    'brownies': 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2020/10/14/0/FNK_PECAN_PIE_BROWNIES_H_f_s4x3.jpg.rend.hgtvcom.1280.720.suffix/1602697125514.jpeg'
+                    'brownies': 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2020/10/14/0/FNK_PECAN_PIE_BROWNIES_H_f_s4x3.jpg.rend.hgtvcom.1280.720.suffix/1602697125514.jpeg',
+                    'cookies': 'https://preppykitchen.com/wp-content/uploads/2023/04/Peanut-Butter-Chocolate-Chip-Cookies-Recipe-Card.jpg',
+                    'tiramisu': 'https://bakedbrewedbeautiful.com/wp-content/uploads/2021/03/DSC0432-1024x684.jpg',
+                    'macarons': 'https://www.southernliving.com/thmb/dnsycw_-mf35yKRkq3cBsThVzrY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Southern-Living_Macarons_025-0e05e0cd226d44609f55ed8bc9cd3a3e.jpg',
                 };
                 return images[product] || ''; // Return empty string if product not found
             }
@@ -225,8 +282,15 @@
             document.getElementById('orderForm').addEventListener('submit', function(event) {
                 event.preventDefault();
                 // You can add code here to submit the order
-                alert('Order submitted!');
+                alert('Order submitted! Thank you for buying at 2Sweet4U');
+                clearOrders();
+                updateTotalPrice(); // Reset total price after submitting order
             });
+
+            function clearOrders() {
+                const orderSection = document.getElementById('orderSection');
+                orderSection.innerHTML = ''; // Clear the order section
+            }
         </script>
     </main>
     
