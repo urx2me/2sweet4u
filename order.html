@@ -207,7 +207,7 @@
             <a href="index.html">Home</a>
             <a href="about.html">About</a>
             <a href="menu.html">Menu</a>
-            <a href="order.html">Order</a>
+            <a href=""><u><strong>Order</strong></u></a>
             <a href="location.html">Location</a>
             <a href="customersupport.html">Customer Support</a>
         </nav>
@@ -295,7 +295,7 @@ function addToCart() {
                 const option = optionSelect.value;
                 let totalPrice;
                 if (option === 'box') {
-                    totalPrice = productPrice * quantity * 10;
+                    totalPrice = productPrice * quantity * 3;
                 } else {
                     totalPrice = productPrice * quantity;
                 }
@@ -305,15 +305,15 @@ function addToCart() {
 
             function getProductPrice(product) {
                 const prices = {
-                    'truffles': 250.00,
-                    'brownies': 150.00,
-                    'cookies': 200.00,
-                    'tiramisu': 300.00,
-                    'macarons': 150.00,
-                    'bunet': 250.00,
+                    'truffles': 150.00,
+                    'brownies': 40.00,
+                    'cookies': 30.00,
+                    'tiramisu': 150.00,
+                    'macarons': 80.00,
+                    'bunet': 200.00,
                     'Chocolate Pudding with Miso Caramel': 150.00,
-                    'Chocolate Mousse': 400.00,
-                    'Chocolate-Peanut Butter Cookie Cake': 300.00,
+                    'Chocolate Mousse': 300.00,
+                    'Chocolate-Peanut Butter Cookie Cake': 400.00,
                     'Strawberry Cheesecake': 280.00,
                     'Stuffed Strawberry': 100.00
                 };
