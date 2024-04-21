@@ -67,6 +67,12 @@
             padding-left: 40%;
             font-family: 'Open Sans';
         }
+        label{
+            font-weight: bold;
+        }
+        textarea{
+            resize: none;
+        }
     </style>
 </head>
 <body>
@@ -95,14 +101,18 @@
                 <label for="">Email</label><br>
                 <input type="text"><br><br><br>
                 <label for="">What can we help you with?</label><br>
-                <input type="radio"> <label for="">Payment Issues</label><br>
-                <input type="radio"> <label for="">Website Issues</label><br>   
-                <input type="radio"> <label for="">Other:</label> <input type="text"> <br><br><br>
+                <input type="radio"> Payment Issues<br>
+                <input type="radio"> Website Issues<br>   
+                <input type="radio"> Other: <input type="text"> <br><br><br>
                 <label for="">Details</label><br>
                 <textarea name="" id="" cols="30" rows="10"></textarea><br><br><br>
-                <input type="submit"><br><br>
+                <input type="submit" onclick="Message()"><br><br>
             </form>
-        
+            <script>
+                function Message() {
+                    alert("Thank you for contacting us! We'll get back to you in 3-5 business days");
+                }
+            </script>
     </main>
     
 </body>
