@@ -9,7 +9,6 @@
         header {
             position: relative;
             height: 20%;
-            padding: 10px;
             overflow: hidden;
         }
         .background {
@@ -33,7 +32,8 @@
             color: white;
             width: 50vw;
             height: 17vw;
-            margin: auto;
+            margin: 3%;
+            margin-left: 24.5%;
             margin-bottom: 2.5%;
             font-size: 5.5vw;
             font-weight: bold;
@@ -76,14 +76,13 @@
         .menu-item {
             display: flex;
             justify-content: space-around;
-            margin-bottom: 20px;
+            margin-bottom: 20%;
             color: aliceblue;
             text-align: center;
         }
 
         .menu-item img {
             width: 100%;
-            max-width: 300px;
             object-fit: cover;
         }
 
@@ -93,18 +92,25 @@
 
         .product {
             border: 2px solid white;
-            padding: 10px;
-            margin-bottom: 20px;
+            padding: 5%;
             color: white;
-            font-size: 25px;
+            font-size: 2vw;
             display: flex;
             align-items: center;
             position: relative;
+            width: 50%;
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 5%;
+        }
+        h3{
+            padding-left: 43%;
         }
 
         #productImage {
-            width: 200px;
-            margin-right: 20px;
+            width: 50%;
+            margin-left: 25%;
         }
 
         .product-info {
@@ -118,7 +124,7 @@
         }
 
         #quantityPrice input {
-            width: 50px;
+            width: 3vw;
             text-align: center;
         }
 
@@ -131,7 +137,7 @@
 
         label {
             color: whitesmoke;
-            font-size: 25px;
+            font-size: 2vw;
         }
 
         main {
@@ -141,28 +147,31 @@
 
         #orderForm {
             position: relative;
+           margin-left: 5%;
         }
 
         #submitOrderButton {
-            font-size: 20px;
-            padding: 10px 20px;
+            font-size: 2vw;
+            padding: 1%;
             background-color: #4CAF50;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 5%;
             cursor: pointer;
         }
 
         #submitOrderButtonContainer,
         #totalPrice {
             text-align: right;
-            margin-right: 20px;
-            margin-bottom: 20px;
+            margin-top: 2%;
+            margin-right: 20%;
+            
         }
 
         #totalPrice {
-            font-size: 30px;
+            font-size: 3vw;
             color: whitesmoke;
+            margin-right: 20%;
         }
 
         #submitOrderButtonContainer {
@@ -171,22 +180,30 @@
 
         .remove-button {
             position: absolute;
-            top: 5px;
-            right: 5px;
+            top: 3%;
+            right: 2%;
             background-color: red;
             color: white;
             border: none;
             border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            font-size: 20px;
+            width: 7%;
+            height: 10%;
+            font-size: 1.5vw;
             cursor: pointer;
         }
+        button{
+            font-size: 2vw;
+        }
+        .product select{
+            font-size: 1vw;
+        }
+    
     </style>
 </head>
 <body>
     <header>
         <div class="background"></div> 
+        <div id="top">
         <span id="sweet4u">2Sweet4U</span>
         <nav>
             <a href="index.html">Home</a>
@@ -195,7 +212,8 @@
             <a href="order.html">Order</a>
             <a href="location.html">Location</a>
             <a href="customersupport.html">Customer Support</a>
-        </nav><br><br><br>   
+        </nav>
+        </div><br><br><br>   
         <div class="box">
             <p>ORDER</p>
         </div>
@@ -204,8 +222,8 @@
     <main>
         <h1>Order Form</h1>
         <form id="orderForm">
-            <label for="productSelection">Select a Product:</label>
-            <select id="productSelection" style="font-size: 25px;">
+            <label for="productSelection" style="font-weight: bold;padding-left: 20%;">Select a Product:</label>
+            <select id="productSelection" style="font-size: 1.8vw;padding: .2%;">
                 <option value="truffles">Truffles</option>
                 <option value="brownies">Brownies</option>
                 <option value="cookies">Chocolate Chip Cookies</option>
@@ -218,12 +236,12 @@
                 <option value="Strawberry Cheesecake">Strawberry Cheesecake</option>
                 <option value="Stuffed Strawberry">Stuffed Strawberry</option>
             </select>
-            <button type="button" onclick="addToCart()">Add to Cart</button>
+            <button style="font-weight: bold; font-size: 1vw;" type="button" onclick="addToCart()">Add to Cart</button><br><br><br>
             <div id="orderSection"></div>
             <div id="totalPrice"></div>
             <div id="submitOrderButtonContainer">
                 <button type="button" id="submitOrderButton" onclick="submitOrder()">Submit Order</button>
-            </div>
+            </div><br><br>
         </form>
 
         <script>
@@ -375,7 +393,11 @@
                     submitOrderButtonContainer.style.display = 'none';
                 }
             }
-
+            window.addEventListener('scroll', function() {
+            var top = document.getElementById('top');
+            var isScrolled = window.scrollY > 0;
+            top.classList.toggle('dark', isScrolled);
+        });
         </script>
     </main>
     
