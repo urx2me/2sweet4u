@@ -99,6 +99,7 @@
             font-size: 25px;
             display: flex;
             align-items: center;
+            position: relative;
         }
 
         #productImage {
@@ -150,7 +151,6 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            /* display: none; */
         }
 
         #submitOrderButtonContainer,
@@ -163,7 +163,24 @@
         #totalPrice {
             font-size: 30px;
             color: whitesmoke;
-            /* display: none; */
+        }
+
+        #submitOrderButtonContainer {
+            display: none;
+        }
+
+        .remove-button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 20px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -194,6 +211,12 @@
                 <option value="cookies">Chocolate Chip Cookies</option>
                 <option value="tiramisu">Tiramisu</option>
                 <option value="macarons">Macarons</option>
+                <option value="bunet">Bunet</option>
+                <option value="Chocolate Pudding with Miso Caramel">Chocolate Pudding with Miso Caramel</option>
+                <option value="Chocolate Mousse">Chocolate Mousse</option>
+                <option value="Chocolate-Peanut Butter Cookie Cake">Chocolate-Peanut Butter Cookie Cake</option>
+                <option value="Strawberry Cheesecake">Strawberry Cheesecake</option>
+                <option value="Stuffed Strawberry">Stuffed Strawberry</option>
             </select>
             <button type="button" onclick="addToCart()">Add to Cart</button>
             <div id="orderSection"></div>
@@ -208,15 +231,14 @@
                 const selectedProduct = document.getElementById('productSelection').value;
                 const orderSection = document.getElementById('orderSection');
                 
-                // Check if the product is already in the cart
                 const productAlreadyInCart = orderSection.querySelector(`#${selectedProduct}Product`);
                 if (productAlreadyInCart) {
                     alert('This product is already in the cart.');
-                    return; // Do not add the product again
+                    return;
                 }
                 
                 const productDiv = document.createElement('div');
-                productDiv.id = `${selectedProduct}Product`; // Use product ID as identifier
+                productDiv.id = `${selectedProduct}Product`;
                 productDiv.classList.add('product');
                 productDiv.innerHTML = `
                     <img id="productImage" src="${getProductImage(selectedProduct)}" alt="${selectedProduct}">
@@ -225,9 +247,14 @@
                         <div id="quantityPrice">
                             <label for="${selectedProduct}Quantity">Quantity:</label>
                             <input type="number" id="${selectedProduct}Quantity" min="1" value="1">
+                            <label for="${selectedProduct}Option">Option:</label>
+                            <select id="${selectedProduct}Option">
+                                ${getProductOptions(selectedProduct)}
+                            </select>
                             <p>Price: ₱<span id="${selectedProduct}Price">0.00</span></p>
                         </div>
                     </div>
+                    <button class="remove-button" onclick="removeProduct('${selectedProduct}Product')">X</button>
                 `;
 
                 productDiv.addEventListener('input', function() {
@@ -241,69 +268,114 @@
 
             function calculatePrice(product) {
                 const quantityInput = document.getElementById(`${product}Quantity`);
+                const optionSelect = document.getElementById(`${product}Option`);
                 const priceSpan = document.getElementById(`${product}Price`);
                 const productPrice = getProductPrice(product);
                 const quantity = parseInt(quantityInput.value);
-                const totalPrice = productPrice * quantity;
+                const option = optionSelect.value;
+                let totalPrice;
+                if (option === 'box') {
+                    totalPrice = productPrice * quantity * 10;
+                } else {
+                    totalPrice = productPrice * quantity;
+                }
                 priceSpan.textContent = totalPrice.toFixed(2);
                 updateTotalPrice();
             }
 
             function getProductPrice(product) {
-                // Define product prices here
                 const prices = {
                     'truffles': 250.00,
                     'brownies': 150.00,
                     'cookies': 200.00,
                     'tiramisu': 300.00,
-                    'macarons': 180.00
+                    'macarons': 180.00,
+                    'bunet': 250.00,
+                    'Chocolate Pudding with Miso Caramel': 150.00,
+                    'Chocolate Mousse': 200.00,
+                    'Chocolate-Peanut Butter Cookie Cake': 300.00,
+                    'Strawberry Cheesecake': 180.00,
+                    'Stuffed Strawberry': 180.00
                 };
-                return prices[product] || 0; // Return 0 if product not found
+                return prices[product] || 0;
             }
 
             function getProductImage(product) {
-                // Define product images here
                 const images = {
                     'truffles': 'https://insanelygoodrecipes.com/wp-content/uploads/2022/01/Homemade-Chocolate-Truffles-with-Fresh-Berries.jpg',
                     'brownies': 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2020/10/14/0/FNK_PECAN_PIE_BROWNIES_H_f_s4x3.jpg.rend.hgtvcom.1280.720.suffix/1602697125514.jpeg',
                     'cookies': 'https://preppykitchen.com/wp-content/uploads/2023/04/Peanut-Butter-Chocolate-Chip-Cookies-Recipe-Card.jpg',
                     'tiramisu': 'https://bakedbrewedbeautiful.com/wp-content/uploads/2021/03/DSC0432-1024x684.jpg',
-                    'macarons': 'https://www.southernliving.com/thmb/dnsycw_-mf35yKRkq3cBsThVzrY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Southern-Living_Macarons_025-0e05e0cd226d44609f55ed8bc9cd3a3e.jpg'
+                    'macarons': 'https://www.southernliving.com/thmb/dnsycw_-mf35yKRkq3cBsThVzrY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Southern-Living_Macarons_025-0e05e0cd226d44609f55ed8bc9cd3a3e.jpg',
+                    'bunet': '',
+                    'pudding': '',
+                    'mousse': '',
+                    'chocolate-peanut': '',
+                    'cheesecake': '',
+                    'stuffed': '',
                 };
-                return images[product] || ''; // Return empty string if product not found
+                return images[product] || '';
+            }
+
+            function getProductOptions(product) {
+                const options = {
+                    'truffles': '<option value="box">Box</option><option value="pieces">Pieces</option>',
+                    'brownies': '<option value="box">Box</option><option value="pieces">Pieces</option>',
+                    'cookies': '<option value="box">Box</option><option value="pieces">Pieces</option>',
+                    'tiramisu': '<option value="box">Box</option><option value="slices">Slices</option>',
+                    'macarons': '<option value="box">Box</option><option value="pieces">Pieces</option>',
+                    'bunet': '<option value="box">Box</option><option value="slices">Slices</option>',
+                    'Chocolate Pudding with Miso Caramel': '<option value="piece">Piece</option>',
+                    'Chocolate Mousse': '<option value="box">Box</option><option value="slices">Slices</option>',
+                    'Chocolate-Peanut Butter Cookie Cake': '<option value="box">Box</option><option value="slices">Slices</option>',
+                    'Strawberry Cheesecake': '<option value="box">Box</option><option value="slices">Slices</option>',
+                    'Stuffed Strawberry': '<option value="box">Box</option><option value="pieces">Pieces</option>',
+                };
+                return options[product] || '';
             }
 
             function submitOrder() {
                 alert('Order submitted! Thank you for buying at 2Sweet4U');
                 clearOrders();
+                const totalPriceElement = document.getElementById('totalPrice');
+                totalPriceElement.textContent = '';
             }
 
             function clearOrders() {
                 const orderSection = document.getElementById('orderSection');
-                orderSection.innerHTML = ''; // Clear the order section
-                updateTotalPrice(); // Update total price and show/hide submit button
+                orderSection.innerHTML = '';
+                updateTotalPrice();
+            }
+
+            function removeProduct(productId) {
+                const productToRemove = document.getElementById(productId);
+                productToRemove.remove();
+                updateTotalPrice();
             }
 
             function updateTotalPrice() {
                 const orderSection = document.getElementById('orderSection');
                 const productDivs = orderSection.querySelectorAll('.product');
                 let totalPrice = 0;
-                productDivs.forEach(function(productDiv) {
-                    const priceSpan = productDiv.querySelector('span');
-                    const price = parseFloat(priceSpan.textContent);
-                    totalPrice += price;
-                });
-                const totalPriceElement = document.getElementById('totalPrice');
-                totalPriceElement.textContent = `Total: ₱${totalPrice.toFixed(2)}`;
-                const submitOrderButtonContainer = document.getElementById('submitOrderButtonContainer');
-                if (totalPrice > 0) {
-                    totalPriceElement.style.display = 'block'; // Show total price
-                    submitOrderButtonContainer.style.display = 'block'; // Show submit order button container
+
+                if (productDivs.length > 0) {
+                    productDivs.forEach(function(productDiv) {
+                        const priceSpan = productDiv.querySelector('span');
+                        const price = parseFloat(priceSpan.textContent);
+                        totalPrice += price;
+                    });
+                    const totalPriceElement = document.getElementById('totalPrice');
+                    totalPriceElement.textContent = `Total: ₱${totalPrice.toFixed(2)}`;
+                    const submitOrderButtonContainer = document.getElementById('submitOrderButtonContainer');
+                    submitOrderButtonContainer.style.display = 'block';
                 } else {
-                    totalPriceElement.style.display = 'none'; // Hide total price
-                    submitOrderButtonContainer.style.display = 'none'; // Hide submit order button container
+                    const totalPriceElement = document.getElementById('totalPrice');
+                    totalPriceElement.textContent = '';
+                    const submitOrderButtonContainer = document.getElementById('submitOrderButtonContainer');
+                    submitOrderButtonContainer.style.display = 'none';
                 }
             }
+
         </script>
     </main>
     
