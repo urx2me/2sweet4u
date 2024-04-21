@@ -19,6 +19,18 @@ a{
 nav{
     float: right;
     display: inline;
+    padding-top: 0.5%;
+    padding-right: 3%;
+}
+
+#top{
+    position: fixed;
+    width: 100%;
+    padding: 1%;
+}
+
+#top.dark{
+    background-color: black;
 }
 
 body{
