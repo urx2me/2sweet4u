@@ -275,10 +275,8 @@
                 const option = optionSelect.value;
                 let totalPrice;
                 if (option === 'box') {
-                    // Calculate price based on the selected option
-                    totalPrice = productPrice * quantity * 10; // For example, multiply by 10 for a box
+                    totalPrice = productPrice * quantity * 10;
                 } else {
-                    // Calculate price based on the default option (e.g., pieces)
                     totalPrice = productPrice * quantity;
                 }
                 priceSpan.textContent = totalPrice.toFixed(2);
@@ -328,8 +326,8 @@
                     'macarons': '<option value="box">Box</option><option value="pieces">Pieces</option>',
                     'bunet': '<option value="box">Box</option><option value="slices">Slices</option>',
                     'Chocolate Pudding with Miso Caramel': '<option value="piece">Piece</option>',
-                    'Chocolate Mousse': '<option value="box">Box</option><option value="pieces">Pieces</option>',
-                    'Chocolate-Peanut Butter Cookie Cake': '<option value="box">Box</option><option value="pieces">Pieces</option>',
+                    'Chocolate Mousse': '<option value="box">Box</option><option value="slices">Slices</option>',
+                    'Chocolate-Peanut Butter Cookie Cake': '<option value="box">Box</option><option value="slices">Slices</option>',
                     'Strawberry Cheesecake': '<option value="box">Box</option><option value="slices">Slices</option>',
                     'Stuffed Strawberry': '<option value="box">Box</option><option value="pieces">Pieces</option>',
                 };
