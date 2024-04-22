@@ -5,9 +5,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2sweet4u</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        header{
+            position: relative;
+            height: 20%;
+            overflow: hidden;
+        }
+        .background{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url(https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA4L2hpcHBvdW5pY29ybl9waG90b19vZl9iYWtlcnlfc2hvcGZyb250X3ZpZXdfX2lzb2xhdGVkX29uX2JhY2tncl9jMDJjOWY3Mi03NGYwLTRkOWQtODZkNi1iYWYwZWY4ODkwNzdfMS5qcGc.jpg); 
+            background-position: center; 
+            background-size: cover; 
+            opacity: 30%;
+            z-index: -1;
+        }
+
+        .box{
+            border: 5px;
+            border-style: solid;
+            border-color: white;
+            text-align: center;
+            color: white;
+            width: 50vw;
+            height: 17vw;
+            margin: 3%;
+            margin-left: 24.5%;
+            margin-bottom: 2.5%;
+            font-size: 5.5vw;
+            font-weight: bold;
+            font-family: Caveat;
+            top: 0%;
+        }
+        #map-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 5%;
+            margin-right: 5%;
+            margin-left: 5%;
+        }
+        #map {
+            width: 60%;
+            height: 400px;
+            margin-top: 5%;
+            float: right;
+            margin-right: 5%;
+            margin-bottom: 5%;
+        }
+        .visit-info{
+            font-family: 'Open Sans';
+            text-align: center;
+            color: white;
+            font-size: 1.5vw;
+        }
+        .info{
+            font-family: 'Open Sans';
+            color: white;
+            width: 30%;
+            margin-left: 5%;
+            float: left;
+            font-size: 1.5vw;
+        }
+
+        .other-branches{
+            font-family: 'Open Sans';
+            color: white;
+            font-size: 1.5vw;
+            text-align: center;
+            list-style-type: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .other-branches li{
+            padding-top: 2%;
+            padding-bottom: 2%;
+        }
+
+        @media only screen and (max-width: 768px) {
+            #map {
+                width: 100%;
+                height: 300px;
+            }
+            .info {
+                width: 100%;
+                margin-left: 0;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header>       
+    <header> 
+        <div class="background"></div> 
+        <div id="top">    
         <span id="sweet4u">2Sweet4U</span>
         <nav>
             <a href="index.html">Home</a>
@@ -17,8 +111,47 @@
             <a href=""><u><strong>Location</strong></u></a>
             <a href="customersupport.html">Customer Support</a>
         </nav>
+        </div><br><br><br>   
+        <div class="box">
+            <p>Location</p>
+        </div>
         
     </header>
-    
+    <main>
+    <div id="map-container">
+    <iframe id="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10942.264958116888!2d121.13389612860053!3d14.15520212764246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd65acefba73b3%3A0x283b6fe3bcb2d278!2sThe%20Olive%20Hotel%20Residences!5e0!3m2!1sen!2sph!4v1713756096944!5m2!1sen!2sph" frameborder="0" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        <div class="info">
+        <h2>Main Branch Location</h2>
+        <p>Lyceum of the Philippines University - Laguna</p>
+        <p>Hours of Operation: Monday-Saturday, 11:00 AM - 9:00 PM</p>
+        <p>Contact: 555-1234 | info@2sweet4u.com</p>
+        <p>Parking Available: Yes</p>
+        <p>Public Transit: jeepney or Bus</p>
+        <p>Neighborhood Info: Located near walter mart makiling</p>
+        <p>COVID-19 Information: Masks required, limited indoor seating</p>
+        </div>
+    </div>
+    <div class="other-branches">
+        <h2>Other Branch Locations:</h2>
+        <ul>
+            <li>Shaw Boulevard, Brgy. Addition Hills, Mandaluyong, Manila</li>
+            <li>Espana Boulevard, Sampaloc, Manila</li>
+            <li>Aurora Boulevard, Cubao, Quezon City</li>
+            <li>Alabang-Zapote Road, Alabang, Muntinlupa</li>
+            <li>C5 Road, Libis, Quezon City</li>
+        </ul>
+    </div>
+    <div class="visit-info">
+        <p>Visit our restaurant at Lyceum of the Philippines University - Laguna to experience delicious food in a welcoming atmosphere!</p>
+        <p>We look forward to serving you soon!</p>
+    </div>
+    </main>
+    <script>
+        window.addEventListener('scroll', function() {
+            var top = document.getElementById('top');
+            var isScrolled = window.scrollY > 0;
+            top.classList.toggle('dark', isScrolled);
+        });
+    </script> 
 </body>
 </html>
