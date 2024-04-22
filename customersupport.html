@@ -35,7 +35,8 @@
             color: white;
             width: 50vw;
             height: 17vw;
-            margin: auto;
+            margin: 3%;
+            margin-left: 24.5%;
             margin-bottom: 2.5%;
             font-size: 5.5vw;
             font-weight: bold;
@@ -46,7 +47,7 @@
             position: relative;
             height: 60%;
         }
-        .csupport{
+        /*.csupport{
             position: absolute;
             top: 0;
             left: 0;
@@ -59,18 +60,26 @@
             z-index: -2;
             filter: blur(8px);
             opacity: 10%;
-        }
+        }*/
         .form{
             color: white;
             padding-top: 5%;
-            padding-left: 40%;
+            padding-left: 30%;
             font-family: 'Open Sans';
+            max-width: 500px;
+            margin: 0 auto;
+            font-size: 1.5vw;
+            border: 5px solid #081522;
+            background-color: rgba(30, 30, 30, 0.235);
         }
         label{
             font-weight: bold;
         }
         textarea{
             resize: none;
+        }
+        input{
+            font-size: 1vw;
         }
     </style>
 </head>
@@ -95,7 +104,7 @@
     </header>
 
     <main>
-        <div class="csupport"> </div>
+        <div class="csupport"> </div><br><br>
             <form class="form" action="">
                 <label for="">Name</label><br>
                 <input type="text"><br><br><br>
@@ -108,7 +117,7 @@
                 <label for="">Details</label><br>
                 <textarea name="" id="" cols="30" rows="10"></textarea><br><br><br>
                 <input type="submit" onclick="Message()"><br><br>
-            </form>
+            </form><br><br><br>
             <script>
                 function Message() {
                     alert("Thank you for contacting us! We'll get back to you in 3-5 business days");
