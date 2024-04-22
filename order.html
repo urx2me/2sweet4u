@@ -105,8 +105,6 @@
             margin-bottom: 5%;
             text-align: center;
         }
-        h3{
-        }
 
         #productImage {
             width: 50%;
@@ -209,7 +207,7 @@
             <a href="index.html">Home</a>
             <a href="about.html">About</a>
             <a href="menu.html">Menu</a>
-            <a href="order.html">Order</a>
+            <a href=""><u><strong>Order</strong></u></a>
             <a href="location.html">Location</a>
             <a href="customersupport.html">Customer Support</a>
         </nav>
@@ -245,44 +243,48 @@
         </form>
 
         <script>
-            function addToCart() {
-                const selectedProduct = document.getElementById('productSelection').value;
-                const orderSection = document.getElementById('orderSection');
-                
-                const productAlreadyInCart = orderSection.querySelector(`#${selectedProduct}Product`);
-                if (productAlreadyInCart) {
-                    alert('This product is already in the cart.');
-                    return;
-                }
-                
-                const productDiv = document.createElement('div');
-                productDiv.id = `${selectedProduct}Product`;
-                productDiv.classList.add('product');
-                productDiv.innerHTML = `
-                    <img id="productImage" src="${getProductImage(selectedProduct)}" alt="${selectedProduct}">
-                    <div class="product-info">
-                        <h3>${selectedProduct.charAt(0).toUpperCase() + selectedProduct.slice(1)}</h3>
-                        <div id="quantityPrice">
-                            <label for="${selectedProduct}Quantity">Quantity:</label>
-                            <input type="number" id="${selectedProduct}Quantity" min="1" value="1" max="100">
-                            <label for="${selectedProduct}Option">Option:</label>
-                            <select id="${selectedProduct}Option">
-                                ${getProductOptions(selectedProduct)}
-                            </select>
-                            <p>Price: ₱<span id="${selectedProduct}Price">0.00</span></p>
-                        </div>
-                    </div>
-                    <button class="remove-button" onclick="removeProduct('${selectedProduct}Product')">X</button>
-                `;
+function addToCart() {
+    const selectedProduct = document.getElementById('productSelection').value;
+    const orderSection = document.getElementById('orderSection');
 
-                productDiv.addEventListener('input', function() {
-                    calculatePrice(selectedProduct);
-                });
+    const productAlreadyInCart = orderSection.querySelector(`[data-product="${selectedProduct}"]`);
+    if (productAlreadyInCart) {
+        alert('This product is already in the cart.');
+        return;
+    }
 
-                orderSection.appendChild(productDiv);
-                calculatePrice(selectedProduct);
-                updateTotalPrice();
-            }
+
+    const productId = `${selectedProduct}Product_${Date.now()}`;
+
+    const productDiv = document.createElement('div');
+    productDiv.dataset.product = selectedProduct;
+    productDiv.id = productId;
+    productDiv.classList.add('product');
+    productDiv.innerHTML = `
+        <img id="productImage" src="${getProductImage(selectedProduct)}" alt="${selectedProduct}">
+        <div class="product-info">
+            <h3>${selectedProduct.charAt(0).toUpperCase() + selectedProduct.slice(1)}</h3>
+            <div id="quantityPrice">
+                <label for="${selectedProduct}Quantity">Quantity:</label>
+                <input type="number" id="${selectedProduct}Quantity" min="1" value="1" max="100">
+                <label for="${selectedProduct}Option">Option:</label>
+                <select id="${selectedProduct}Option">
+                    ${getProductOptions(selectedProduct)}
+                </select>
+                <p>Price: ₱<span id="${selectedProduct}Price">0.00</span></p>
+            </div>
+        </div>
+        <button class="remove-button" onclick="removeProduct('${productId}')">X</button>
+    `;
+
+    productDiv.addEventListener('input', function () {
+        calculatePrice(selectedProduct);
+    });
+
+    orderSection.appendChild(productDiv);
+    calculatePrice(selectedProduct);
+    updateTotalPrice();
+}
 
             function calculatePrice(product) {
                 const quantityInput = document.getElementById(`${product}Quantity`);
@@ -293,7 +295,7 @@
                 const option = optionSelect.value;
                 let totalPrice;
                 if (option === 'box') {
-                    totalPrice = productPrice * quantity * 10;
+                    totalPrice = productPrice * quantity * 3;
                 } else {
                     totalPrice = productPrice * quantity;
                 }
@@ -303,17 +305,17 @@
 
             function getProductPrice(product) {
                 const prices = {
-                    'truffles': 250.00,
-                    'brownies': 150.00,
-                    'cookies': 200.00,
-                    'tiramisu': 300.00,
-                    'macarons': 180.00,
-                    'bunet': 250.00,
+                    'truffles': 150.00,
+                    'brownies': 40.00,
+                    'cookies': 30.00,
+                    'tiramisu': 150.00,
+                    'macarons': 80.00,
+                    'bunet': 200.00,
                     'Chocolate Pudding with Miso Caramel': 150.00,
-                    'Chocolate Mousse': 200.00,
-                    'Chocolate-Peanut Butter Cookie Cake': 300.00,
-                    'Strawberry Cheesecake': 180.00,
-                    'Stuffed Strawberry': 180.00
+                    'Chocolate Mousse': 300.00,
+                    'Chocolate-Peanut Butter Cookie Cake': 400.00,
+                    'Strawberry Cheesecake': 280.00,
+                    'Stuffed Strawberry': 100.00
                 };
                 return prices[product] || 0;
             }
@@ -325,12 +327,12 @@
                     'cookies': 'https://preppykitchen.com/wp-content/uploads/2023/04/Peanut-Butter-Chocolate-Chip-Cookies-Recipe-Card.jpg',
                     'tiramisu': 'https://bakedbrewedbeautiful.com/wp-content/uploads/2021/03/DSC0432-1024x684.jpg',
                     'macarons': 'https://www.southernliving.com/thmb/dnsycw_-mf35yKRkq3cBsThVzrY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Southern-Living_Macarons_025-0e05e0cd226d44609f55ed8bc9cd3a3e.jpg',
-                    'bunet': '',
-                    'pudding': '',
-                    'mousse': '',
-                    'chocolate-peanut': '',
-                    'cheesecake': '',
-                    'stuffed': '',
+                    'bunet': 'https://www.foodandwine.com/thmb/KjRpGpHmNcPHjj9LsNm7knG-yGs=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Bunet-Chocolate-Creme-Caramel-with-Amaretti-FT-RECIPE0922-2000-cd2f8d32f1fe496c908f747c45db71f3.jpg',
+                    'Chocolate Pudding with Miso Caramel': 'https://www.foodandwine.com/thmb/IQ0jHN6_HnT2O2PL8EcNhBR7fyI=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/chocolate-puddings-with-miso-caramel-FT-RECIPE0222-7130a3d614af4903bc99197dfa36418a.jpg',
+                    'Chocolate Mousse': 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2020/04/06/FNK_Chocolate-Mousse_H_v2_4x3.jpg.rend.hgtvcom.791.594.suffix/1586200107816.jpeg',
+                    'Chocolate-Peanut Butter Cookie Cake': 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2017/12/18/0/FNK_Giant-Chocolate-PB-Cookie-Cake-h1_s4x3.jpg.rend.hgtvcom.791.527.suffix/1513598524116.jpeg',
+                    'Strawberry Cheesecake': 'https://www.tasteofhome.com/wp-content/uploads/2018/01/Strawberry-Cheesecake_EXPS_FT20_3270_F_0221_1-3.jpg?fit=700,700',
+                    'Stuffed Strawberry': 'https://www.tasteofhome.com/wp-content/uploads/2018/01/Special-Stuffed-Strawberries_EXPS_HCA20_22373_E03_13_8b-2.jpg?fit=700,700',
                 };
                 return images[product] || '';
             }
